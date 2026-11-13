@@ -1,19 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Cloudflare Site</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloudflare Pages 部署示例</title>
+  <meta name="description" content="一个用于演示 Cloudflare Pages「连接 Git，推送即构建」部署流程的静态页面。" />
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Hello from Cloudflare Pages! 🚀</h1>
-        <p>This is a static website deployed automatically.</p>
-        <div class="card">
-            <h3>Deployment Status</h3>
-            <p>Success! Your site is live.</p>
-        </div>
-    </div>
+  <header class="site-header">
+    <nav class="nav">
+      <span class="brand">Pages Demo</span>
+      <ul class="nav-links">
+        <li><a href="#features">特性</a></li>
+        <li><a href="#deploy">部署步骤</a></li>
+        <li><a href="https://developers.cloudflare.com/pages/" target="_blank" rel="noreferrer">官方文档</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Cloudflare Pages</p>
+      <h1>连接 Git，推送即构建</h1>
+      <p class="lead">
+        这是一个零依赖的纯静态示例页面。仓库推送到 Git 后，Cloudflare Pages 会自动构建产物、
+        部署到全球边缘节点，并为每个分支生成独立的预览地址。
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#deploy">查看部署步骤</a>
+        <a class="btn" href="#features">了解页面能力</a>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <h2>页面包含哪些内容</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>纯静态资源</h3>
+          <p>index.html 与 styles.css 两个文件，无构建步骤、无依赖安装，Pages 直接按静态文件发布。</p>
+        </article>
+        <article class="card">
+          <h3>响应式布局</h3>
+          <p>使用 CSS Grid 与 Flexbox，桌面端三列、移动端单列，无需任何 CSS 框架。</p>
+        </article>
+        <article class="card">
+          <h3>自定义 404</h3>
+          <p>仓库中的 404.html 会被 Pages 自动识别为站点级错误页。</p>
+        </article>
+        <article class="card">
+          <h3>边缘缓存</h3>
+          <p>静态资源缓存在 Cloudflare 边缘节点，命中缓存的请求几乎没有回源开销。</p>
+        </article>
+        <article class="card">
+          <h3>免费额度</h3>
+          <p>Pages 免费套餐提供每月构建次数与带宽额度，个人项目与小型站点足够使用。</p>
+        </article>
+        <article class="card">
+          <h3>自定义域名</h3>
+          <p>在 Pages 项目的 Custom domains 中添加域名，DNS 记录会自动配置并自动签发证书。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="deploy" class="section section-alt">
+      <h2>部署到 Cloudflare Pages</h2>
+      <ol class="steps">
+        <li>
+          <h3>1. 推送代码到 Git 仓库</h3>
+          <p>在项目目录执行 <code>git init</code>、<code>git add .</code>、<code>git commit</code>，再关联远端仓库并推送。</p>
+        </li>
+        <li>
+          <h3>2. 在 Dashboard 新建 Pages 项目</h3>
+          <p>登录 Cloudflare Dashboard，进入 Workers &amp; Pages → Create application → Pages → Connect to Git。</p>
+        </li>
+        <li>
+          <h3>3. 选择仓库与分支</h3>
+          <p>授权 GitHub / GitLab 账号，选择存放本项目的仓库和生产分支（通常是 <code>main</code>）。</p>
+        </li>
+        <li>
+          <h3>4. 填写构建设置</h3>
+          <p>Framework preset 选 <code>None</code>，Build command 留空，Build output directory 填 <code>.</code>（本项目无构建产物目录）。</p>
+        </li>
+        <li>
+          <h3>5. 保存并部署</h3>
+          <p>点击 Save and Deploy。后续每次推送都会自动触发构建，非生产分支会生成 <code>*.pages.dev</code> 预览地址。</p>
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>示例页面 · 托管于 Cloudflare Pages</p>
+  </footer>
 </body>
 </html>
